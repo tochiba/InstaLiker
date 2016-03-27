@@ -13,8 +13,8 @@ class ViewController: UIViewController {
 
     let Instagram =
     [
-        "consumerKey": "XXXXXXXXXXX",
-        "consumerSecret": "XXXXXXXXXXX"
+        "consumerKey": "XXX",
+        "consumerSecret": "XXX"
     ]
     let services = Services()
     let DocumentDirectory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
@@ -27,6 +27,10 @@ class ViewController: UIViewController {
         // init now
         get_url_handler()
         
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         doAuthService("Instagram")
     }
 
@@ -86,8 +90,6 @@ class ViewController: UIViewController {
         
         parameters["name"] = service
         doOAuthInstagram(parameters)
-        print("\(service) not implemented")
-        
     }
     
     func doOAuthInstagram(serviceParameters: [String:String]){
@@ -104,7 +106,7 @@ class ViewController: UIViewController {
         let state: String = generateStateWithLength(20) as String
         oauthswift.authorize_url_handler = get_url_handler()
         
-        oauthswift.authorizeWithCallbackURL( NSURL(string: "oauth-swift://oauth-callback/instagram")!, scope: "likes+comments", state:state, success: {
+        oauthswift.authorizeWithCallbackURL( NSURL(string: "oauth-swift://oauth-callback/instagram")!, scope: "likes", state:state, success: {
             credential, response, parameters in
             
             self.showTokenAlert(serviceParameters["name"], credential: credential)
