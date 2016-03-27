@@ -14,6 +14,15 @@
 		8F5517C71CA825E400492953 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F5517C51CA825E400492953 /* LaunchScreen.storyboard */; };
 		8F5517D21CA825E500492953 /* InstalikerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5517D11CA825E500492953 /* InstalikerTests.swift */; };
 		8F5517DD1CA825E500492953 /* InstalikerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5517DC1CA825E500492953 /* InstalikerUITests.swift */; };
+		8F5517ED1CA82A5100492953 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F5517EA1CA82A5100492953 /* SwiftyJSON.framework */; };
+		8F5517EE1CA82A5100492953 /* OAuthSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F5517EB1CA82A5100492953 /* OAuthSwift.framework */; };
+		8F5517EF1CA82A5100492953 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F5517EC1CA82A5100492953 /* Alamofire.framework */; };
+		8F5517F01CA82A6500492953 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F5517EA1CA82A5100492953 /* SwiftyJSON.framework */; };
+		8F5517F11CA82A6500492953 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8F5517EA1CA82A5100492953 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8F5517F21CA82A6500492953 /* OAuthSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F5517EB1CA82A5100492953 /* OAuthSwift.framework */; };
+		8F5517F31CA82A6500492953 /* OAuthSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8F5517EB1CA82A5100492953 /* OAuthSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8F5517F41CA82A6500492953 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F5517EC1CA82A5100492953 /* Alamofire.framework */; };
+		8F5517F51CA82A6500492953 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8F5517EC1CA82A5100492953 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +42,22 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8F5517F61CA82A6500492953 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8F5517F31CA82A6500492953 /* OAuthSwift.framework in Embed Frameworks */,
+				8F5517F51CA82A6500492953 /* Alamofire.framework in Embed Frameworks */,
+				8F5517F11CA82A6500492953 /* SwiftyJSON.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		8F5517B91CA825E400492953 /* Instaliker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instaliker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F5517BC1CA825E400492953 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +72,9 @@
 		8F5517D81CA825E500492953 /* InstalikerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstalikerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F5517DC1CA825E500492953 /* InstalikerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstalikerUITests.swift; sourceTree = "<group>"; };
 		8F5517DE1CA825E500492953 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8F5517EA1CA82A5100492953 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		8F5517EB1CA82A5100492953 /* OAuthSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OAuthSwift.framework; path = Carthage/Build/iOS/OAuthSwift.framework; sourceTree = "<group>"; };
+		8F5517EC1CA82A5100492953 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +82,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F5517F01CA82A6500492953 /* SwiftyJSON.framework in Frameworks */,
+				8F5517F41CA82A6500492953 /* Alamofire.framework in Frameworks */,
+				8F5517ED1CA82A5100492953 /* SwiftyJSON.framework in Frameworks */,
+				8F5517EE1CA82A5100492953 /* OAuthSwift.framework in Frameworks */,
+				8F5517EF1CA82A5100492953 /* Alamofire.framework in Frameworks */,
+				8F5517F21CA82A6500492953 /* OAuthSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +111,9 @@
 		8F5517B01CA825E400492953 = {
 			isa = PBXGroup;
 			children = (
+				8F5517EA1CA82A5100492953 /* SwiftyJSON.framework */,
+				8F5517EB1CA82A5100492953 /* OAuthSwift.framework */,
+				8F5517EC1CA82A5100492953 /* Alamofire.framework */,
 				8F5517BB1CA825E400492953 /* Instaliker */,
 				8F5517D01CA825E500492953 /* InstalikerTests */,
 				8F5517DB1CA825E500492953 /* InstalikerUITests */,
@@ -135,6 +172,7 @@
 				8F5517B51CA825E400492953 /* Sources */,
 				8F5517B61CA825E400492953 /* Frameworks */,
 				8F5517B71CA825E400492953 /* Resources */,
+				8F5517F61CA82A6500492953 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -397,6 +435,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Instaliker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.koganepj.Instaliker;
@@ -408,6 +450,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Instaliker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.koganepj.Instaliker;
@@ -482,6 +528,7 @@
 				8F5517E31CA825E500492953 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8F5517E41CA825E500492953 /* Build configuration list for PBXNativeTarget "InstalikerTests" */ = {
 			isa = XCConfigurationList;
@@ -490,6 +537,7 @@
 				8F5517E61CA825E500492953 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8F5517E71CA825E500492953 /* Build configuration list for PBXNativeTarget "InstalikerUITests" */ = {
 			isa = XCConfigurationList;
@@ -498,6 +546,7 @@
 				8F5517E91CA825E500492953 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
