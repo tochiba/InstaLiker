@@ -1,3 +1,4 @@
-github "OAuthSwift/OAuthSwift" ~> 0.5.0
+github "rs/SDWebImage"
+github "OAuthSwift/OAuthSwift" == 0.5.1
 github "Alamofire/Alamofire" == 3.2.1
 github "SwiftyJSON/SwiftyJSON"

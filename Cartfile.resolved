@@ -1,3 +1,4 @@
 github "Alamofire/Alamofire" "3.2.1"
 github "OAuthSwift/OAuthSwift" "0.5.1"
+github "rs/SDWebImage" "3.7.5"
 github "SwiftyJSON/SwiftyJSON" "2.3.3"
