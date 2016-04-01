@@ -25,6 +25,12 @@
 		8F5517F51CA82A6500492953 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8F5517EC1CA82A5100492953 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8F5517F91CA82B6C00492953 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5517F81CA82B6C00492953 /* WebViewController.swift */; };
 		8F5517FC1CA82CC100492953 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5517FB1CA82CC100492953 /* Services.swift */; };
+		DBBF4D771CA8FF0400C418EF /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBF4D761CA8FF0400C418EF /* OAuthManager.swift */; };
+		DBBF4D791CA90F3300C418EF /* InstaPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBF4D781CA90F3300C418EF /* InstaPhoto.swift */; };
+		DBBF4D7B1CA91A7200C418EF /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBBF4D7A1CA91A7200C418EF /* WebImage.framework */; };
+		DBBF4D7C1CA91A7600C418EF /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBBF4D7A1CA91A7200C418EF /* WebImage.framework */; };
+		DBBF4D7D1CA91A7600C418EF /* WebImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBBF4D7A1CA91A7200C418EF /* WebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DBBF4D7F1CA923D100C418EF /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBF4D7E1CA923D100C418EF /* TagViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +60,7 @@
 				8F5517F31CA82A6500492953 /* OAuthSwift.framework in Embed Frameworks */,
 				8F5517F51CA82A6500492953 /* Alamofire.framework in Embed Frameworks */,
 				8F5517F11CA82A6500492953 /* SwiftyJSON.framework in Embed Frameworks */,
+				DBBF4D7D1CA91A7600C418EF /* WebImage.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -79,6 +86,10 @@
 		8F5517EC1CA82A5100492953 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		8F5517F81CA82B6C00492953 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebViewController.swift; path = ViewController/WebViewController.swift; sourceTree = "<group>"; };
 		8F5517FB1CA82CC100492953 /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Services.swift; path = Model/Services.swift; sourceTree = "<group>"; };
+		DBBF4D761CA8FF0400C418EF /* OAuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OAuthManager.swift; path = Manager/OAuthManager.swift; sourceTree = "<group>"; };
+		DBBF4D781CA90F3300C418EF /* InstaPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InstaPhoto.swift; path = Model/InstaPhoto.swift; sourceTree = "<group>"; };
+		DBBF4D7A1CA91A7200C418EF /* WebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebImage.framework; path = Carthage/Build/iOS/WebImage.framework; sourceTree = "<group>"; };
+		DBBF4D7E1CA923D100C418EF /* TagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TagViewController.swift; path = ViewController/TagViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,12 +97,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBBF4D7B1CA91A7200C418EF /* WebImage.framework in Frameworks */,
 				8F5517F01CA82A6500492953 /* SwiftyJSON.framework in Frameworks */,
 				8F5517F41CA82A6500492953 /* Alamofire.framework in Frameworks */,
 				8F5517ED1CA82A5100492953 /* SwiftyJSON.framework in Frameworks */,
 				8F5517EE1CA82A5100492953 /* OAuthSwift.framework in Frameworks */,
 				8F5517EF1CA82A5100492953 /* Alamofire.framework in Frameworks */,
 				8F5517F21CA82A6500492953 /* OAuthSwift.framework in Frameworks */,
+				DBBF4D7C1CA91A7600C418EF /* WebImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +128,7 @@
 		8F5517B01CA825E400492953 = {
 			isa = PBXGroup;
 			children = (
+				DBBF4D7A1CA91A7200C418EF /* WebImage.framework */,
 				8F5517EA1CA82A5100492953 /* SwiftyJSON.framework */,
 				8F5517EB1CA82A5100492953 /* OAuthSwift.framework */,
 				8F5517EC1CA82A5100492953 /* Alamofire.framework */,
@@ -138,6 +152,7 @@
 		8F5517BB1CA825E400492953 /* Instaliker */ = {
 			isa = PBXGroup;
 			children = (
+				DBBF4D751CA8FEE000C418EF /* Manager */,
 				8F5517FA1CA82CA000492953 /* Model */,
 				8F5517F71CA82B4A00492953 /* ViewController */,
 				8F5517BC1CA825E400492953 /* AppDelegate.swift */,
@@ -172,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				8F5517F81CA82B6C00492953 /* WebViewController.swift */,
+				DBBF4D7E1CA923D100C418EF /* TagViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -180,8 +196,17 @@
 			isa = PBXGroup;
 			children = (
 				8F5517FB1CA82CC100492953 /* Services.swift */,
+				DBBF4D781CA90F3300C418EF /* InstaPhoto.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		DBBF4D751CA8FEE000C418EF /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				DBBF4D761CA8FF0400C418EF /* OAuthManager.swift */,
+			);
+			name = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,10 +341,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBBF4D771CA8FF0400C418EF /* OAuthManager.swift in Sources */,
 				8F5517BF1CA825E400492953 /* ViewController.swift in Sources */,
+				DBBF4D791CA90F3300C418EF /* InstaPhoto.swift in Sources */,
 				8F5517FC1CA82CC100492953 /* Services.swift in Sources */,
 				8F5517F91CA82B6C00492953 /* WebViewController.swift in Sources */,
 				8F5517BD1CA825E400492953 /* AppDelegate.swift in Sources */,
+				DBBF4D7F1CA923D100C418EF /* TagViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
