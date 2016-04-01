@@ -8,158 +8,116 @@
 
 import UIKit
 import OAuthSwift
+import WebImage
 
-class ViewController: UIViewController {
-
-    let Instagram =
-    [
-        "consumerKey": "XXX",
-        "consumerSecret": "XXX"
-    ]
-    let services = Services()
-    let DocumentDirectory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-    let FileManager: NSFileManager = NSFileManager.defaultManager()
+class ViewController: UIViewController, OAuthManagerRefreshDelegate,
+    UICollectionViewDelegate,
+    UICollectionViewDataSource,
+    UICollectionViewDelegateFlowLayout {
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
+    
+    var cellSize: CGSize = CGSizeZero
+    var photoList: [InstaPhoto] = []
+    var isLoading: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        initConf()
-        // init now
-        get_url_handler()
-        
+        self.indicator.hidden = false
+        self.indicator.startAnimating()
+        setupCellSize()
+        reload()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        doAuthService("Instagram")
+        OAuthManager.sharedInstance.request(self)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
+    private func setupCellSize() {
+        let space: Int = 1 //マージン
+        let spaceNum: Int = 0 //スペースの数
+        let cellNum: Int = 1 //セルの数
+        let screenSizeWidth = UIScreen.mainScreen().bounds.size.width
+        let size = (screenSizeWidth - CGFloat(space * spaceNum)) / CGFloat(cellNum)
+        self.cellSize = CGSizeMake(size, 240)
     }
 
-    func initConf() {
-        initConfOld()
-        print("Load configuration from \n\(self.confPath)")
-        
-        // Load config from model file
-//        if let path = NSBundle.mainBundle().pathForResource("Services", ofType: "plist") {
-//            services.loadFromFile(path)
-//            
-//            if !FileManager.fileExistsAtPath(confPath) {
-//                do {
-//                    try FileManager.copyItemAtPath(path, toPath: confPath)
-//                }catch {
-//                    print("Failed to copy empty conf to\(confPath)")
-//                }
-//            }
-//        }
-//        services.loadFromFile(confPath)
-    }
-    
-    func initConfOld() { // TODO Must be removed later
-        services["Instagram"] = Instagram
-    }
-    
-    var confPath: String {
-        let appPath = "\(DocumentDirectory)/.oauth/"
-        if !FileManager.fileExistsAtPath(appPath) {
-            do {
-                try FileManager.createDirectoryAtPath(appPath, withIntermediateDirectories: false, attributes: nil)
-            }catch {
-                print("Failed to create \(appPath)")
-            }
-        }
-        return "\(appPath)Services.plist"
-    }
-    
-    func doAuthService(service: String) {
-        
-        guard var parameters = services[service] else {
-            showAlertView("Miss configuration", message: "\(service) not configured")
+    private func reload() {
+        if isLoading == true {
             return
         }
         
-        if Services.parametersEmpty(parameters) { // no value to set
-            let message = "\(service) seems to have not weel configured. \nPlease fill consumer key and secret into configuration file \(self.confPath)"
-            print(message)
-            showAlertView("Miss configuration", message: message)
-            // TODO here ask for parameters instead
-        }
-        
-        parameters["name"] = service
-        doOAuthInstagram(parameters)
-    }
-    
-    func doOAuthInstagram(serviceParameters: [String:String]){
-        let oauthswift = OAuth2Swift(
-            consumerKey:    serviceParameters["consumerKey"]!,
-            consumerSecret: serviceParameters["consumerSecret"]!,
-            authorizeUrl:   "https://api.instagram.com/oauth/authorize",
-            responseType:   "token"
-            // or
-            // accessTokenUrl: "https://api.instagram.com/oauth/access_token",
-            // responseType:   "code"
-        )
-        
-        let state: String = generateStateWithLength(20) as String
-        oauthswift.authorize_url_handler = get_url_handler()
-        
-        oauthswift.authorizeWithCallbackURL( NSURL(string: "oauth-swift://oauth-callback/instagram")!, scope: "likes", state:state, success: {
-            credential, response, parameters in
-            
-            self.showTokenAlert(serviceParameters["name"], credential: credential)
-            self.testInstagram(oauthswift)
-            
-            }, failure: { error in
-                print(error.localizedDescription)
-        })
-        
-    }
-    func testInstagram(oauthswift: OAuth2Swift) {
-        let url :String = "https://api.instagram.com/v1/users/1574083/?access_token=\(oauthswift.client.credential.oauth_token)"
-        let parameters :Dictionary = Dictionary<String, AnyObject>()
-        oauthswift.client.get(url, parameters: parameters,
-            success: {
-                data, response in
-                let jsonDict: AnyObject! = try? NSJSONSerialization.JSONObjectWithData(data, options: [])
-                print(jsonDict)
-                
-            }, failure: { error in
-                print(error)
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            self.isLoading = true
+            dispatch_async(dispatch_get_main_queue(), {
+                self.setupPhotoList()
+                self.indicator.startAnimating()
+                self.indicator.hidden = true
+                self.collectionView.reloadData()
+                self.isLoading = false
+            })
         })
     }
-
-    func showTokenAlert(name: String?, credential: OAuthSwiftCredential) {
-        var message = "oauth_token:\(credential.oauth_token)"
-        if !credential.oauth_token_secret.isEmpty {
-            message += "\n\noauth_toke_secret:\(credential.oauth_token_secret)"
-        }
-        self.showAlertView(name ?? "Service", message: message)
-        
-        if let service = name {
-            services.updateService(service, dico: ["authentified":"1"])
-            // TODO refresh graphic
-        }
+    
+    private func setupPhotoList() {
+        self.photoList = OAuthManager.sharedInstance.getMyTimeLine()
     }
     
-    func showAlertView(title: String, message: String) {
-            let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+    // MARK: UICollectionViewDataSource
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print(self.photoList.count)
+        return self.photoList.count
     }
-
-    // MARK: create an optionnal internal web view to handle connection
-    func createWebViewController() -> WebViewController {
-        let controller = WebViewController()
-        return controller
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PhotoCell", forIndexPath: indexPath)
+        if let imageView = cell.viewWithTag(1) as? UIImageView {
+            imageView.image = nil
+            if let url = NSURL(string: self.photoList[indexPath.row].imageUrl) {
+                imageView.sd_setImageWithURL(url)
+            }
+            imageView.setNeedsLayout()
+        }
+        
+        return cell
     }
-
-    func get_url_handler() -> OAuthSwiftURLHandlerType {
-        // Create a WebViewController with default behaviour from OAuthWebViewController
-        let url_handler = createWebViewController()
-        return url_handler
+    
+    // MARK: UICollectionViewDelegate
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let p = self.photoList[indexPath.row]
+        self.performSegueWithIdentifier("HomeToTag", sender: p)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let i = sender as? InstaPhoto {
+            if let vc = segue.destinationViewController as? TagViewController {
+                vc.instaPhoto = i
+            }
+        }
+    }
+    // MARK: UICollectionViewDelegateFlowLayout
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return self.cellSize
+    }
+    
+    func didFinishLoadData() {
+        print(OAuthManager.sharedInstance.getMyTimeLine())
+        reload()
     }
 }
-
