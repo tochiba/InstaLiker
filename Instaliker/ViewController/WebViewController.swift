@@ -19,7 +19,8 @@ class WebViewController: OAuthWebViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.backgroundColor = UIColor.blackColor()
+        self.webView.backgroundColor = UIColor.blackColor()
         self.webView.frame = UIScreen.mainScreen().bounds
         self.webView.scalesPageToFit = true
         self.webView.delegate = self
